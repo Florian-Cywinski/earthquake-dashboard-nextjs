@@ -63,10 +63,10 @@ export default function Home({ earthquakeData }) {
       <main>
         <h1 className="text-2xl font-bold text-center my-4">Earthquake Dashboard</h1>
         <div className="mb-8">
-          <StatsPlots data={earthquakeData} />
+          <EarthquakeMap earthquakeData={earthquakeData} />
         </div>
         <div>
-          <EarthquakeMap earthquakeData={earthquakeData} />
+          <StatsPlots data={earthquakeData} />
         </div>
       </main>
     </>
