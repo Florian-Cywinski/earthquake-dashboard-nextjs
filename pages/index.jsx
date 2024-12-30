@@ -6,12 +6,12 @@ import path from "path";
 import Papa from "papaparse";
 
 // Dynamisches Laden der EarthquakeMap-Komponente
-// const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { ssr: false });
+const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { ssr: false });
 
-const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { 
-  ssr: false,
-  loading: () => <p>Loading map...</p>, // Ladeanzeige
-});
+// const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { 
+//   ssr: false,
+//   loading: () => <p>Loading map...</p>, // Ladeanzeige
+// });
 
 
 export async function getStaticProps() {

@@ -3,33 +3,26 @@ import { useEffect, useState } from 'react';
 import "leaflet/dist/leaflet.css";
 import chroma from 'chroma-js';
 
-// Korrekte Initialisierung und Dynamik für Kartenkomponenten
 export default function EarthquakeMap({ earthquakeData }) {
-  const startYear = 1965;
-  const endYear = 2016;
-
-  const colorScale = chroma
-    .scale(["#FF5733", "#33FF57", "#3357FF", "#FFFF33", "#FF33FF"])
-    .domain([startYear, endYear]);
-
-  const getColor = (year) => colorScale(year).hex();
+  // console.log("Earthquake data received in EarthquakeMap:", earthquakeData);
 
   return (
     <div className="h-96 w-full">
       <MapContainer center={[0, 0]} zoom={2} className="h-full w-full">
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-        />
+      <TileLayer
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CartoDB</a>'
+      />
+
         {earthquakeData.map((quake, idx) => {
-          const year = new Date(quake.Date).getFullYear();
+          // console.log(`Rendering marker ${idx}`, quake);
           return (
             <CircleMarker
               key={idx}
               center={[quake.Latitude, quake.Longitude]}
               radius={Math.log(quake.Magnitude || 1) * 3}
-              fillColor={getColor(year)}
-              color={getColor(year)}
+              fillColor="red"
+              color="red"
               fillOpacity={0.8}
               stroke={false}
             >
