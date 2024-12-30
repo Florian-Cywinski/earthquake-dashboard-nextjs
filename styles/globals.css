@@ -1,0 +1,9 @@
+/* Nachfolgendes wird in _app.jsx eingebunden */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-dark text-light;
+}
