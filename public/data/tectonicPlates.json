@@ -1,0 +1,78 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "PlateName": "Pacific Plate"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-180, 60],
+              [-120, 60],
+              [-120, 10],
+              [-180, 10],
+              [-180, 60]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PlateName": "North American Plate"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-130, 50],
+              [-60, 50],
+              [-60, 20],
+              [-130, 20],
+              [-130, 50]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PlateName": "Eurasian Plate"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [20, 70],
+              [50, 70],
+              [50, 40],
+              [20, 40],
+              [20, 70]
+            ]
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "PlateName": "African Plate"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [-20, 10],
+              [30, 10],
+              [30, -20],
+              [-20, -20],
+              [-20, 10]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+  
