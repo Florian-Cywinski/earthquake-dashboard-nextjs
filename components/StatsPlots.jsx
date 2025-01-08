@@ -8,8 +8,19 @@ export default function StatsPlots({ data }) {
       yearCounts[year] = (yearCounts[year] || 0) + 1;
     });
     return {
-      xAxis: { type: "category", data: Object.keys(yearCounts) },
-      yAxis: { type: "value" },
+      xAxis: {
+        type: "category",
+        data: Object.keys(yearCounts),
+        name: "Year", // Achsenbeschriftung für x-Achse
+        nameLocation: "middle", // Position der Beschriftung
+        nameGap: 30, // Abstand der Beschriftung von der Achse
+      },
+      yAxis: {
+        type: "value",
+        name: "Number of earthquakes", // Achsenbeschriftung für y-Achse
+        nameLocation: "middle", // Position der Beschriftung
+        nameGap: 40, // Abstand der Beschriftung von der Achse
+      },
       series: [
         {
           data: Object.values(yearCounts),
@@ -36,8 +47,22 @@ export default function StatsPlots({ data }) {
     });
 
     return {
-      xAxis: { type: "category", data: Object.keys(years) },
-      yAxis: { type: "value" },
+      xAxis: {
+        type: "category",
+        data: Object.keys(years),
+        name: "Year", // Achsenbeschriftung für x-Achse
+        nameLocation: "middle", // Position der Beschriftung
+        nameGap: 30, // Abstand der Beschriftung von der Achse
+      },
+      yAxis: {
+        type: "value",
+        name: "Average magnitude", // Achsenbeschriftung für y-Achse
+        nameLocation: "middle", // Position der Beschriftung
+        nameGap: 40, // Abstand der Beschriftung von der Achse
+        min: 5, // Minimale Grenze für Magnitude
+        max: 7, // Maximale Grenze für Magnitude
+        interval: 0.5, // Intervall von 0.5 für die y-Achse
+      },
       series: [
         {
           data: avgMagnitude,
@@ -52,11 +77,11 @@ export default function StatsPlots({ data }) {
   return (
     <div className="space-y-8">
       <div className="bg-dark p-4 rounded shadow">
-        <h2 className="text-lg font-semibold mb-4">Earthquake Frequency Over the Years</h2>
+        <h2 className="text-lg font-semibold mb-4 text-center">Earthquake Frequency Over the Years</h2>
         <ReactEcharts option={processYearlyData()} style={{ height: "400px" }} />
       </div>
       <div className="bg-dark p-4 rounded shadow">
-        <h2 className="text-lg font-semibold mb-4">Average Magnitude Per Year</h2>
+        <h2 className="text-lg font-semibold mb-4 text-center">Average Magnitude Per Year</h2>
         <ReactEcharts option={processMagnitudeData()} style={{ height: "400px" }} />
       </div>
     </div>

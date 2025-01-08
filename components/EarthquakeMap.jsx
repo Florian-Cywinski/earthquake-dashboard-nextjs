@@ -132,7 +132,7 @@ export default function EarthquakeMap({ earthquakeData }) {
       </MapContainer>
 
       <div className="absolute top-2 right-2 p-4 z-[1000] rounded-lg bg-white shadow-md text-sm overflow-y-auto max-h-[80%]">
-        <h4 className="text-black mb-2">Legende</h4>
+        <h4 className="text-black mb-2">Legend</h4>
         <div className="grid grid-cols-2 gap-1">
           {Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i).map((year, index) => (
             <div key={index} className="flex items-center mb-1">
@@ -155,7 +155,7 @@ export default function EarthquakeMap({ earthquakeData }) {
             className="inline-block w-3 h-0.5"
             style={{ backgroundColor: "brown", marginLeft: "2px" }}
           ></span>
-          <span className="text-black text-xs ml-2">Plattengrenzen</span>
+          <span className="text-black text-xs ml-2">Plate boundaries</span>
         </div>
       </div>
     </div>

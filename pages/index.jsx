@@ -61,7 +61,8 @@ export default function Home({ earthquakeData }) {
         <title>Earthquake Dashboard</title>
       </Head>
       <main>
-        <h1 className="text-2xl font-bold text-center my-4">Earthquake Dashboard</h1>
+        <h1 className="text-2xl font-bold text-center my-4">Earthquake Dashboard - Significant Earthquakes, 1965-2016</h1>
+        <h2 className="text-l text-center my-4">Date, time, and location of all earthquakes with magnitude of 5.5 or higher</h2>
         <div className="mb-8">
           <EarthquakeMap earthquakeData={earthquakeData} />
         </div>
