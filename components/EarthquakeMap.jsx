@@ -26,10 +26,10 @@ export default function EarthquakeMap({ earthquakeData }) {
   const [plateBoundaries, setPlateBoundaries] = useState(null);
   const [plateNames, setPlateNames] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   useEffect(() => {
     async function fetchPlateData() {
-      setLoading(true);
       const boundariesResponse = await fetch(
         "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
       );
@@ -42,15 +42,26 @@ export default function EarthquakeMap({ earthquakeData }) {
 
       setPlateBoundaries(boundariesData);
       setPlateNames(namesData);
+
       setLoading(false);
     }
     fetchPlateData();
   }, []);
 
+  const handleMapLoad = () => {
+    setMapLoaded(true);
+  };
+
+  useEffect(() => {
+    if (mapLoaded && !loading) {
+      setLoading(false);
+    }
+  }, [mapLoaded, loading]);
+
   return (
     <div className="w-[95%] h-[700px] mx-auto overflow-hidden border border-gray-300 shadow-lg relative">
       {loading && (
-        <div style={loadingStyle}>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-lg shadow-md text-lg font-bold text-gray-800 z-[1000]">
           <p>Loading...</p>
         </div>
       )}
@@ -63,6 +74,7 @@ export default function EarthquakeMap({ earthquakeData }) {
         maxBoundsViscosity={1.0}
         className="h-full w-full"
         scrollWheelZoom={true}
+        whenCreated={handleMapLoad}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.de/{z}/{x}/{y}.png"
@@ -113,85 +125,39 @@ export default function EarthquakeMap({ earthquakeData }) {
                 offset={[0, 0]}
                 position={[midPoint[1], midPoint[0]]}
               >
-                <span style={{ fontWeight: "bold", color: "black", background: "white", padding: "2px" }}>
-                  {plate.properties.PlateName}
-                </span>
+                <span className="font-bold text-black bg-white p-1">{plate.properties.PlateName}</span>
               </Tooltip>
             );
           })}
       </MapContainer>
 
-      <div style={legendStyle}>
-        <h4 style={{ color: "black", marginBottom: "10px" }}>Legende</h4>
-        <div style={legendGrid}>
+      <div className="absolute top-2 right-2 p-4 z-[1000] rounded-lg bg-white shadow-md text-sm overflow-y-auto max-h-[80%]">
+        <h4 className="text-black mb-2">Legende</h4>
+        <div className="grid grid-cols-2 gap-1">
           {Array.from({ length: endYear - startYear + 1 }, (_, i) => startYear + i).map((year, index) => (
-            <div key={index} style={legendItemStyle}>
+            <div key={index} className="flex items-center mb-1">
               <span
-                style={{
-                  backgroundColor: getColor(year),
-                  display: "inline-block",
-                  width: "12px",
-                  height: "12px",
-                  borderRadius: "50%",
-                  marginRight: "5px",
-                }}
+                className="inline-block w-3 h-3 rounded-full mr-2"
+                style={{ backgroundColor: getColor(year) }}
               ></span>
-              <span style={{ color: "black", fontSize: "12px" }}>{year}</span>
+              <span className="text-black text-xs">{year}</span>
             </div>
           ))}
         </div>
-        <div style={legendItemStyle}>
+        {/* Marker für Plattengrenzen in der Legende */}
+        <div className="flex items-center mb-1">
+          {/* Zwei dünnere Striche nebeneinander für gestrichelte Darstellung */}
           <span
-            style={{
-              display: "inline-block",
-              width: "20px",
-              height: "5px",
-              backgroundColor: "brown",
-              marginRight: "5px",
-            }}
+            className="inline-block w-3 h-0.5 mr-1"
+            style={{ backgroundColor: "brown", marginRight: "2px" }}
           ></span>
-          <span style={{ color: "black", fontSize: "12px" }}>Plattengrenzen</span>
+          <span
+            className="inline-block w-3 h-0.5"
+            style={{ backgroundColor: "brown", marginLeft: "2px" }}
+          ></span>
+          <span className="text-black text-xs ml-2">Plattengrenzen</span>
         </div>
       </div>
     </div>
   );
 }
-
-const loadingStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  background: "white",
-  padding: "10px",
-  borderRadius: "5px",
-  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-  fontSize: "16px",
-  zIndex: 1000,
-};
-
-const legendStyle = {
-  position: "absolute",
-  top: "10px",
-  right: "10px",
-  padding: "10px",
-  zIndex: 1000,
-  borderRadius: "5px",
-  backgroundColor: "white",
-  boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-  fontSize: "12px",
-  overflowY: "auto",
-  maxHeight: "80%",
-};
-
-const legendGrid = {
-  display: "grid",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "5px",
-};
-
-const legendItemStyle = {
-  display: "flex",
-  alignItems: "center",
-  marginBottom: "5px",
-};
