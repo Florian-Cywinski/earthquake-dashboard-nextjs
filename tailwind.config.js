@@ -16,15 +16,3 @@ module.exports = {
   darkMode: 'class', // Aktivierung des dunklen Modus
   plugins: [],
 };
-
-
-
-// /** @type {import('tailwindcss').Config} */
-// module.exports = {
-//   content: [],
-//   theme: {
-//     extend: {},
-//   },
-//   plugins: [],
-// }
-

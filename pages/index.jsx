@@ -8,12 +8,6 @@ import Papa from "papaparse";
 // Dynamisches Laden der EarthquakeMap-Komponente
 const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { ssr: false });
 
-// const EarthquakeMap = dynamic(() => import("../components/EarthquakeMap"), { 
-//   ssr: false,
-//   loading: () => <p>Loading map...</p>, // Ladeanzeige
-// });
-
-
 export async function getStaticProps() {
   // Pfad zur CSV-Datei
   const filePath = path.join(process.cwd(), "public/data/earthquake_data.csv");
@@ -73,8 +67,3 @@ export default function Home({ earthquakeData }) {
     </>
   );
 }
-
-
-// export default function Home() {
-//   return <h1>Hello, World!</h1>;
-// }

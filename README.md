@@ -1,3 +1,14 @@
+# Earthquake Dashboard
+
+This is an Earthquake Dashboard showing the most significant earthquakes for the period 1965 to 2016. The date, time and location of all earthquakes with a magnitude of 5.5 or higher are shown on a map. It can be seen that the majority of earthquakes occur along tectonic plates. There are two charts below the map. The first shows the earthquake frequency over the years and the other shows the average magnitude per year. More information about the data set can be found at https://www.kaggle.com/datasets/usgs/earthquake-database. The dashboard was created with NextJS. It was designed using Tailwind.
+
+Check out the dashboard :) - https://earthquake-dashboard-nextjs-fc.netlify.app/
+
+![Alt text](images/earthquake-dashboard.png)
+![Alt text](images/charts.png)
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
